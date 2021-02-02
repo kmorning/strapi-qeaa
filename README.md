@@ -1,3 +1,3 @@
-# Strapi application
+# Strapi QEAA
 
-A quick description of your strapi application
+A Strapi backend for the QEAA website
