@@ -66,7 +66,7 @@ module.exports = shipit => {
                         NODE_ENV: 'production',
                         ADMIN_JWT_SECRET: '${process.env.PROD_ADMIN_JWT_SECRET}',
                         HOST: '${process.env.PROD_HOST}',
-                        PORT: '${process.env.PROD_PORT},
+                        PORT: '${process.env.PROD_PORT}',
                         JWT_SECRET: '${process.env.PROD_JWT_SECRET}'
                         DATABASE_HOST: '${process.env.PROD_DB_HOST}',
                         DATABASE_PORT: '${process.env.PROD_DB_PORT}',
