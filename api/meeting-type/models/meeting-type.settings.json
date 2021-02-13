@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "meeting_types",
+  "info": {
+    "name": "MeetingType",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "detail": {
+      "type": "string"
+    },
+    "icon": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/meeting-types",
+      "handler": "meeting-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/meeting-types/count",
+      "handler": "meeting-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/meeting-types/:id",
+      "handler": "meeting-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/meeting-types",
+      "handler": "meeting-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/meeting-types/:id",
+      "handler": "meeting-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/meeting-types/:id",
+      "handler": "meeting-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
