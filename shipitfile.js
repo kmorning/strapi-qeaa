@@ -102,5 +102,6 @@ module.exports = shipit => {
         await shipit.remote(
             `~/.yarn/bin/pm2 start ${ecosystemFilePath} --env production --watch true`
         )
+        await shipit.remote(`~/.yarn/bin/pm2 save`)
     })
 }
