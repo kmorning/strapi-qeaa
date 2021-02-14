@@ -13,10 +13,12 @@
   "attributes": {
     "code": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "detail": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "icon": {
       "model": "file",
