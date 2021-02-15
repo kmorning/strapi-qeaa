@@ -1,6 +1,6 @@
 'use strict';
 
-const slugify = require('slugify')
+const slugify = require('slugify');
 
 const setSlug = (data) => {
     if (data.name && data.day && data.time) {
@@ -21,6 +21,8 @@ module.exports = {
         },
         beforeUpdate: async (params, data) => {
             setSlug(data)
+            //let types = await strapi.query('meeting-type').find({ id_in: data.types })
+            //console.log(types)
         }
     }
 };
