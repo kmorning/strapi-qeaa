@@ -72,7 +72,13 @@ module.exports = shipit => {
                         DATABASE_PORT: '${process.env.PROD_DB_PORT}',
                         DATABASE_NAME: '${process.env.PROD_DB_NAME}',
                         DATABASE_USERNAME: '${process.env.PROD_DB_USERNAME}',
-                        DATABASE_PASSWORD: '${process.env.PROD_DB_PASSWORD}'
+                        DATABASE_PASSWORD: '${process.env.PROD_DB_PASSWORD}',
+                        SMTP_HOST: ${process.env.PROD_SMTP_HOST}',
+                        SMTP_PORT: ${process.env.PROD_SMTP_PORT}',
+                        SMTP_USERNAME: ${process.env.PROD_SMTP_USERNAME}',
+                        SMTP_PASSWORD: ${process.env.PROD_SMTP_PASSWORD}',
+                        SMTP_FROM: ${process.env.PROD_SMTP_FROM}',
+                        SMTP_REPLY_TO: ${process.env.PROD_SMTP_REPLY_TO}',
                     }
                 }
             ]
