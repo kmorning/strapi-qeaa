@@ -67,18 +67,19 @@ module.exports = shipit => {
                         ADMIN_JWT_SECRET: '${process.env.PROD_ADMIN_JWT_SECRET}',
                         HOST: '${process.env.PROD_HOST}',
                         PORT: '${process.env.PROD_PORT}',
+                        URL: '${process.env.PROD_URL}',
                         JWT_SECRET: '${process.env.PROD_JWT_SECRET}',
                         DATABASE_HOST: '${process.env.PROD_DB_HOST}',
                         DATABASE_PORT: '${process.env.PROD_DB_PORT}',
                         DATABASE_NAME: '${process.env.PROD_DB_NAME}',
                         DATABASE_USERNAME: '${process.env.PROD_DB_USERNAME}',
                         DATABASE_PASSWORD: '${process.env.PROD_DB_PASSWORD}',
-                        SMTP_HOST: ${process.env.PROD_SMTP_HOST}',
-                        SMTP_PORT: ${process.env.PROD_SMTP_PORT}',
-                        SMTP_USERNAME: ${process.env.PROD_SMTP_USERNAME}',
-                        SMTP_PASSWORD: ${process.env.PROD_SMTP_PASSWORD}',
-                        SMTP_FROM: ${process.env.PROD_SMTP_FROM}',
-                        SMTP_REPLY_TO: ${process.env.PROD_SMTP_REPLY_TO}',
+                        SMTP_HOST: '${process.env.PROD_SMTP_HOST}',
+                        SMTP_PORT: '${process.env.PROD_SMTP_PORT}',
+                        SMTP_USERNAME: '${process.env.PROD_SMTP_USERNAME}',
+                        SMTP_PASSWORD: '${process.env.PROD_SMTP_PASSWORD}',
+                        SMTP_FROM: '${process.env.PROD_SMTP_FROM}',
+                        SMTP_REPLY_TO: '${process.env.PROD_SMTP_REPLY_TO}'
                     }
                 }
             ]
