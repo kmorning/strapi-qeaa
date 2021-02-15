@@ -35,6 +35,15 @@
     "time": {
       "type": "time",
       "required": true
+    },
+    "endTime": {
+      "type": "time"
+    },
+    "types": {
+      "unique": true,
+      "collection": "meeting-type",
+      "via": "meetings",
+      "dominant": true
     }
   }
 }

@@ -30,6 +30,10 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "meetings": {
+      "via": "types",
+      "collection": "meeting"
     }
   }
 }
