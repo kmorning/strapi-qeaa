@@ -36,7 +36,7 @@
       "type": "time",
       "required": true
     },
-    "endTime": {
+    "end_time": {
       "type": "time"
     },
     "types": {
