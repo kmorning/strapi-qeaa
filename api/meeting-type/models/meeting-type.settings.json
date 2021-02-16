@@ -32,8 +32,11 @@
       "required": false
     },
     "meetings": {
-      "via": "types",
-      "collection": "meeting"
+      "collection": "meeting",
+      "via": "types"
+    },
+    "category": {
+      "model": "meeting-type-category"
     }
   }
 }

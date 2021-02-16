@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/meeting-type-categories",
+      "handler": "meeting-type-category.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/meeting-type-categories/count",
+      "handler": "meeting-type-category.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/meeting-type-categories/:id",
+      "handler": "meeting-type-category.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/meeting-type-categories",
+      "handler": "meeting-type-category.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/meeting-type-categories/:id",
+      "handler": "meeting-type-category.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/meeting-type-categories/:id",
+      "handler": "meeting-type-category.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

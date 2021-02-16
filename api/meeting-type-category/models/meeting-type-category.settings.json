@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "meeting_type_categories",
+  "info": {
+    "name": "MeetingTypeCategory",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "unique": {
+      "type": "boolean",
+      "default": false
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

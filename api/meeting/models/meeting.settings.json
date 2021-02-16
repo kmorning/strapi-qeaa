@@ -40,9 +40,8 @@
       "type": "time"
     },
     "types": {
-      "unique": true,
-      "collection": "meeting-type",
       "via": "meetings",
+      "collection": "meeting-type",
       "dominant": true
     }
   }
