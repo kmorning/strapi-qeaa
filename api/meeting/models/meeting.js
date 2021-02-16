@@ -10,10 +10,8 @@ const setSlug = (data) => {
 }
 
 const validateTypes = async (data) => {
-    // validate unique types
+    // validate unique type categories
     let unique_catagories = await strapi.query('meeting-type-category').find({unique: true})
-    //console.log(unique_catagories)
-    //let unique_cat_ids = unique_catagories.map(category => {return category.id})
 
     for ( let i = 0; i < unique_catagories.length; i++) {
         let id = unique_catagories[i].id
@@ -21,30 +19,12 @@ const validateTypes = async (data) => {
         let ids = types.map( type => type.id)
         let found_ids = data.types.filter(type => ids.includes(type))
         if (found_ids.length > 1) {
-            return false
-            //console.log('duplicates found')
+            let found_types = types.filter(type => found_ids.includes(type.id))
+            let found_details = found_types.map( type => type.detail)
+            return "Meeting can only have one of the selected types: " + found_details
         }
     }
-    return true
-
-    /*
-    unique_cat_ids.forEach( async id => {
-        let types = await strapi.query('meeting-type').find({ category: id })
-        let ids = types.map( type => type.id)
-        //console.log(ids)
-        let found_ids = data.types.filter(type => ids.includes(type))
-        //console.log(found_ids)
-        if (found_ids.length > 1) {
-            throw new Error('Invalid type selections!')
-        }
-    })
-    */
-    
-    //console.log('ids: ' + unique_ids)
-    //let types = await strapi.query('meeting-type').find({ id_in: data.types })
-    //console.log('this is a unique type: ' + types[0].category.id)
-    //let unique_types = types.filter(type => type.category === unique_ids[0])
-    //console.log(data.types)
+    return null
 };
 
 /**
@@ -59,11 +39,11 @@ module.exports = {
         },
         beforeUpdate: async (params, data) => {
             setSlug(data)
-            const result = await validateTypes(data)
-            if (result === false) {
+            const err = await validateTypes(data)
+            if (err) {
                 //console.log('duplicates found')
                 //throw new Error('Duplicates Found!')
-                throw strapi.errors.badRequest("Having both 'Open' and 'Closed' types is not allowed")
+                throw strapi.errors.badRequest(err)
             }
             //let types = await strapi.query('meeting-type').find({ id_in: data.types })
             //console.log(types)
