@@ -36,17 +36,17 @@ module.exports = {
     lifecycles: {
         beforeCreate: async (data) => {
             setSlug(data)
+            const err = await validateTypes(data)
+            if (err) {
+                throw strapi.errors.badRequest(err)
+            }
         },
         beforeUpdate: async (params, data) => {
             setSlug(data)
             const err = await validateTypes(data)
             if (err) {
-                //console.log('duplicates found')
-                //throw new Error('Duplicates Found!')
                 throw strapi.errors.badRequest(err)
             }
-            //let types = await strapi.query('meeting-type').find({ id_in: data.types })
-            //console.log(types)
         }
     }
 };
