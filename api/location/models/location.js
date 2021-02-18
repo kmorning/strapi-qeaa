@@ -5,6 +5,7 @@
  * to customize this model
  */
 
+ // TODO: auto populate missing fields like postal code
  const geocode = async (data) => {
     const full_address = ['address', 'city', 'postal_code', 'country'].filter( key => {
         if (data[key]) {
@@ -17,6 +18,7 @@
     console.log(full_address)
     try {
         const locations = await strapi.services.location.geosearch(full_address)
+        console.log(locations)
         data.longitude = parseFloat(locations[0].lon)
         data.latitude = parseFloat(locations[0].lat)
     } catch {

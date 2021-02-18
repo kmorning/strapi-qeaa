@@ -25,9 +25,10 @@ interface Location {
 const fetch = require('node-fetch')
 
 module.exports = {
-    geosearch: async (q, limit="1") => {
+    geosearch: async (q, addressdetails="0", limit="1") => {
         const params = new URLSearchParams({
             q,
+            addressdetails,
             limit,
             format: "json"
         })
