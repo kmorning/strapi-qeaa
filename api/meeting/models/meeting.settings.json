@@ -40,9 +40,13 @@
       "type": "time"
     },
     "types": {
-      "via": "meetings",
       "collection": "meeting-type",
+      "via": "meetings",
       "dominant": true
+    },
+    "location": {
+      "via": "meetings",
+      "model": "location"
     }
   }
 }

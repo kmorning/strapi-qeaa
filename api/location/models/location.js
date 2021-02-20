@@ -15,19 +15,30 @@
         return data[key]
     }).join(", ")
 
+    const unamed_address = ['address', 'city', 'province', 'postal_code', 'country'].filter( key => {
+        if (data[key]) {
+            return data[key].length > 0
+        }
+        return false
+    }).map( key => {
+        return data[key]
+    }).join(", ")
+
     //console.log(formatted_address)
     var location
     if (data.geocoded_address !== search_address | data.longitude == null | data.latitude == null) {
         try {
-            const locations = await strapi.services.location.geosearch(search_address, "1")
+            const locations = await strapi.services.location.geosearch(search_address, "1")            
             location = locations[0]
-            console.log(locations)
-            //data.longitude = parseFloat(locations[0].lon)
-            //data.latitude = parseFloat(locations[0].lat)
         } catch {
-            location = null
+            try {
+                const locations = await strapi.services.location.geosearch(unamed_address, "1")
+                location = locations[0]
+            } catch {
+                location = null
+            }
         }
-
+        console.log(location)
         if (location) {
             const empty_fields = ['name', 'address', 'city', 'postal_code'].filter( key => {
                 if (data[key]) {
@@ -87,6 +98,14 @@
             data.geocoded_address = "Not Found!"
         }
     }
+    data.display_name = ['name', 'address', 'city'].filter( key => {
+        if (data[key]) {
+            return data[key].length > 0
+        }
+      return false
+    }).map( key => {
+        return data[key]
+    }).join(", ")
  }
 
 module.exports = {

@@ -59,6 +59,15 @@
     },
     "geocoded_address": {
       "type": "string"
+    },
+    "meetings": {
+      "collection": "meeting",
+      "via": "location"
+    },
+    "display_name": {
+      "type": "string",
+      "unique": true,
+      "required": true
     }
   }
 }
