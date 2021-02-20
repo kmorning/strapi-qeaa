@@ -6,8 +6,8 @@
  */
 
  // TODO: auto populate missing fields like postal code
- const geocode = async (data) => {
-    const full_address = ['address', 'city', 'postal_code', 'country'].filter( key => {
+ const update = async (data) => {
+    const search_address = ['name', 'address', 'city', 'province', 'postal_code', 'country'].filter( key => {
         if (data[key]) {
             return data[key].length > 0
         }
@@ -15,24 +15,28 @@
     }).map( key => {
         return data[key]
     }).join(", ")
-    console.log(full_address)
-    try {
-        const locations = await strapi.services.location.geosearch(full_address)
-        console.log(locations)
-        data.longitude = parseFloat(locations[0].lon)
-        data.latitude = parseFloat(locations[0].lat)
-    } catch {
-        return
+    //console.log(formatted_address)
+    if (data.search_address !== search_address | data.longitude == null | data.latitude == null) {
+        try {
+            const locations = await strapi.services.location.geosearch(search_address, "1")
+            console.log(locations)
+            data.longitude = parseFloat(locations[0].lon)
+            data.latitude = parseFloat(locations[0].lat)
+        } catch {
+            return
+        }
+        data.formatted_address = search_address
     }
  }
 
 module.exports = {
     lifecycles: {
         beforeCreate: async (data) => {
-            await geocode(data)
+            await update(data)
         },
         beforeUpdate: async (params, data) => {
-            await geocode(data)
+            console.log(data)
+            await update(data)
         }
     }
 };
