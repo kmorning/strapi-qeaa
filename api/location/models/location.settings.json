@@ -57,7 +57,7 @@
     "notes": {
       "type": "text"
     },
-    "formatted_address": {
+    "geocoded_address": {
       "type": "string"
     }
   }
