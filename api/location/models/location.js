@@ -27,60 +27,65 @@
         } catch {
             location = null
         }
-        //data.formatted_address = search_address
-    }
 
-    if (location) {
-        const empty_fields = ['name', 'address', 'city', 'postal_code'].filter( key => {
-            if (data[key]) {
-                return data[key].length < 3
+        if (location) {
+            const empty_fields = ['name', 'address', 'city', 'postal_code'].filter( key => {
+                if (data[key]) {
+                    return data[key].length < 3
+                }
+                return true
+            })
+
+            var house_number
+            var road
+            for (var key in location.address) {
+                switch (key) {
+                    case ['place', 'ameninty', 'office', 'club', 'house_name'].includes(key):
+                        if (empty_fields.includes('name')) {
+                            data.name = location.address[key]
+                        }
+                        break
+                    case 'house_number':
+                        house_number = location.address[key]
+                        break
+                    case 'road':
+                        road = location.address[key]
+                    case 'postcode':
+                        if (empty_fields.includes('postal_code')) {
+                            data.postal_code = location.address[key]
+                        }
+                        break
+                    case ['municipality', 'city', 'town', 'village'].includes(key):
+                        if (empty_fields.includes('city')) {
+                            data.city = location.address[key]
+                        }
+                }
             }
-            return true
-        })
 
-        var house_number
-        var road
-        for (var key in location.address) {
-            switch (key) {
-                case ['place', 'ameninty', 'office', 'club', 'house_name'].includes(key):
-                    if (empty_fields.includes('name')) {
-                        data.name = location.address[key]
-                    }
-                    break
-                case 'house_number':
-                    house_number = location.address[key]
-                    break
-                case 'road':
-                    road = location.address[key]
-                case 'postcode':
-                    if (empty_fields.includes('postal_code')) {
-                        data.postal_code = location.address[key]
-                    }
-                    break
-            }
-        }
+            const address = [house_number, road].filter( item => {return item != null}).join(" ")
 
-        const address = [house_number, road].filter( item => {return item != null}).join(" ")
-
-        if (empty_fields.includes['address']) {
-            data.address = address
-        } else if (house_number) {
-            if (!data.address.startsWith(house_number)) {
+           if (empty_fields.includes['address']) {
                 data.address = address
+            } else if (house_number) {
+                if (!data.address.startsWith(house_number)) {
+                    data.address = address
+                }
             }
+
+            data.longitude = parseFloat(location.lon)
+            data.latitude = parseFloat(location.lat)
+
+            data.geocoded_address =  ['name', 'address', 'city', 'province', 'postal_code', 'country'].filter( key => {
+                if (data[key]) {
+                    return data[key].length > 0
+                }
+              return false
+            }).map( key => {
+                return data[key]
+            }).join(", ")
+        } else {
+            data.geocoded_address = "Not Found!"
         }
-
-        data.longitude = parseFloat(location.lon)
-        data.latitude = parseFloat(location.lat)
-
-        data.geocoded_address =  ['name', 'address', 'city', 'province', 'postal_code', 'country'].filter( key => {
-            if (data[key]) {
-                return data[key].length > 0
-            }
-            return false
-        }).map( key => {
-            return data[key]
-        }).join(", ")
     }
  }
 
