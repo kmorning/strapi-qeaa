@@ -6,6 +6,15 @@
  */
 
  const update = async (data) => {
+     const entered_fields =  ['name', 'address', 'city', 'province', 'postal_code', 'country'].filter( key => {
+        if (data[key]) {
+            return data[key].length > 0
+        }
+        return false
+    })
+
+    const search_named_address = entered_fields.map( key => { return data[key] }).join(", ")
+
     const search_address = ['name', 'address', 'city', 'province', 'postal_code', 'country'].filter( key => {
         if (data[key]) {
             return data[key].length > 0
