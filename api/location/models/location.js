@@ -40,7 +40,7 @@ const update = async (data) => {
         location = null
       }
     }
-    console.log(location)
+    //console.log(location)
     if (location) {
       const empty_fields = ['name', 'address', 'city', 'postal_code'].filter((key) => {
         if (data[key]) {
@@ -81,7 +81,6 @@ const update = async (data) => {
           return item != null
         })
         .join(' ')
-      console.log(empty_fields)
       if (empty_fields.includes('address')) {
         data.address = address
       } else if (house_number) {
