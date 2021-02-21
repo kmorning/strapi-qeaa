@@ -23,6 +23,13 @@
     "strapi": true
   },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "max-len": [
+      "error",
+      {
+        "code": 140,
+        "ignoreUrls": true
+      }
+    ]
   }
 }
