@@ -1,13 +1,15 @@
 'use strict'
 
-const slugify = require('slugify')
+const { v4: uuidv4 } = require('uuid')
 
 const setSlug = (data) => {
   console.log(data)
-  if (data.name && data.day && data.time) {
-    const s = data.name + `-` + data.day.toString() + `-` + data.time.toString()
-    data.slug = slugify(s, { lower: true })
+  if (data.slug) {
+    if (data.slug.length === 36) {
+      return
+    }
   }
+  data.slug = uuidv4()
 }
 
 const validateTypes = async (data) => {
