@@ -3,9 +3,10 @@
 const slugify = require('slugify')
 
 const setSlug = (data) => {
+  console.log(data)
   if (data.name && data.day && data.time) {
     const s = data.name + `-` + data.day.toString() + `-` + data.time.toString()
-    data.slug = slugify(s)
+    data.slug = slugify(s, { lower: true })
   }
 }
 
@@ -13,8 +14,8 @@ const validateTypes = async (data) => {
   // validate unique type categories
   let unique_catagories = await strapi.query('meeting-type-category').find({ unique: true })
 
-  for (let i = 0; i < unique_catagories.length; i++) {
-    let id = unique_catagories[i].id
+  for (var category in unique_catagories) {
+    let id = category.id
     let types = await strapi.query('meeting-type').find({ category: id })
     let ids = types.map((type) => type.id)
     let found_ids = data.types.filter((type) => ids.includes(type))
