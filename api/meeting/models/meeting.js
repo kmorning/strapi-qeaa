@@ -3,7 +3,7 @@
 const { v4: uuidv4 } = require('uuid')
 
 const setSlug = (data) => {
-  console.log(data)
+  //console.log(data)
   if (data.slug) {
     if (data.slug.length === 36) {
       return
@@ -13,6 +13,10 @@ const setSlug = (data) => {
 }
 
 const validateTypes = async (data) => {
+  // validate has location
+  if (data.location == null) {
+    return 'Meeting must have a location'
+  }
   // validate unique type categories
   let unique_catagories = await strapi.query('meeting-type-category').find({ unique: true })
 
