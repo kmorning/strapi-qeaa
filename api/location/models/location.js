@@ -13,31 +13,14 @@ const update = async (data) => {
     return false
   })
 
-  const search_named_address = entered_fields
+  const search_named_fields = entered_fields.filter((key) => key !== 'postal_code')
+  const search_named_address = search_named_fields
     .map((key) => {
       return data[key]
     })
     .join(', ')
-
-  const search_address = ['name', 'address', 'city', 'province', 'postal_code', 'country']
-    .filter((key) => {
-      if (data[key]) {
-        return data[key].length > 0
-      }
-      return false
-    })
-    .map((key) => {
-      return data[key]
-    })
-    .join(', ')
-
-  const unamed_address = ['address', 'city', 'province', 'postal_code', 'country']
-    .filter((key) => {
-      if (data[key]) {
-        return data[key].length > 0
-      }
-      return false
-    })
+  const search_fields = search_named_fields.filter((key) => key !== 'name')
+  const search_address = search_fields
     .map((key) => {
       return data[key]
     })
@@ -45,13 +28,13 @@ const update = async (data) => {
 
   //console.log(formatted_address)
   var location
-  if ((data.geocoded_address !== search_address) | (data.longitude == null) | (data.latitude == null)) {
+  if ((data.geocoded_address !== search_named_address) | (data.longitude == null) | (data.latitude == null)) {
     try {
-      const locations = await strapi.services.location.geosearch(search_address, '1')
+      const locations = await strapi.services.location.geosearch(search_named_address, '1')
       location = locations[0]
     } catch {
       try {
-        const locations = await strapi.services.location.geosearch(unamed_address, '1')
+        const locations = await strapi.services.location.geosearch(search_address, '1')
         location = locations[0]
       } catch {
         location = null
@@ -98,8 +81,8 @@ const update = async (data) => {
           return item != null
         })
         .join(' ')
-
-      if (empty_fields.includes['address']) {
+      console.log(empty_fields)
+      if (empty_fields.includes('address')) {
         data.address = address
       } else if (house_number) {
         if (!data.address.startsWith(house_number)) {
