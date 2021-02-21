@@ -45,8 +45,20 @@
       "dominant": true
     },
     "location": {
-      "via": "meetings",
-      "model": "location"
+      "model": "location",
+      "via": "meetings"
+    },
+    "conference_url": {
+      "type": "string"
+    },
+    "conference_url_notes": {
+      "type": "text"
+    },
+    "conference_phone": {
+      "type": "string"
+    },
+    "conference_phone_notes": {
+      "type": "text"
     }
   }
 }

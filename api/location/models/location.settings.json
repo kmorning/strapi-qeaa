@@ -66,8 +66,8 @@
       "type": "float"
     },
     "meetings": {
-      "collection": "meeting",
-      "via": "location"
+      "via": "location",
+      "collection": "meeting"
     }
   }
 }
