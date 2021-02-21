@@ -20,8 +20,22 @@
     "city": {
       "type": "string"
     },
+    "province": {
+      "type": "enumeration",
+      "enum": [
+        "Ontario"
+      ],
+      "default": "Ontario"
+    },
     "postal_code": {
       "type": "string"
+    },
+    "country": {
+      "type": "enumeration",
+      "enum": [
+        "Canada"
+      ],
+      "default": "Canada"
     },
     "image": {
       "model": "file",
@@ -34,40 +48,26 @@
       "plugin": "upload",
       "required": false
     },
+    "notes": {
+      "type": "text"
+    },
+    "display_name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "geocoded_address": {
+      "type": "string"
+    },
     "longitude": {
       "type": "float"
     },
     "latitude": {
       "type": "float"
     },
-    "country": {
-      "type": "enumeration",
-      "enum": [
-        "Canada"
-      ],
-      "default": "Canada"
-    },
-    "province": {
-      "type": "enumeration",
-      "enum": [
-        "Ontario"
-      ],
-      "default": "Ontario"
-    },
-    "notes": {
-      "type": "text"
-    },
-    "geocoded_address": {
-      "type": "string"
-    },
     "meetings": {
       "collection": "meeting",
       "via": "location"
-    },
-    "display_name": {
-      "type": "string",
-      "unique": true,
-      "required": true
     }
   }
 }

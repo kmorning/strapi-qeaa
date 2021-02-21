@@ -15,12 +15,12 @@
       "type": "string",
       "required": true
     },
+    "description": {
+      "type": "text"
+    },
     "unique": {
       "type": "boolean",
       "default": false
-    },
-    "description": {
-      "type": "text"
     }
   }
 }
