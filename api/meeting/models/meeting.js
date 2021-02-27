@@ -58,6 +58,10 @@ module.exports = {
       await strapi.query('meeting').update({ id: result.id }, data)
     },
     beforeUpdate: async (params, data) => {
+      // Don't perform custom update operations when we publish or unpublish
+      if (data.published_at !== undefined) {
+        return
+      }
       setSlug(params, data)
       //console.log(params)
       const err = await validateTypes(data)

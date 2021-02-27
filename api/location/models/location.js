@@ -6,6 +6,10 @@
  */
 
 const update = async (data) => {
+  // Don't perform custom update operations when we publish or unpublish
+  if (data.published_at !== undefined) {
+    return
+  }
   const entered_fields = ['name', 'address', 'city', 'province', 'postal_code', 'country'].filter((key) => {
     if (data[key]) {
       return data[key].length > 0
@@ -126,7 +130,13 @@ module.exports = {
       await update(data)
     },
     beforeUpdate: async (params, data) => {
-      //console.log(data)
+      /*
+      console.log('location updating...')
+      console.log('parms:')
+      console.log(params)
+      console.log('data:')
+      console.log(data)
+      */
       await update(data)
     }
   }
