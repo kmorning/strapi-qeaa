@@ -12,9 +12,7 @@ const validateTypes = async (data) => {
 
     for (var i in unique_categories) {
       let id = unique_categories[i].id
-      //console.log('category id: ' + id)
       let types = await strapi.query('meeting-type').find({ category: id })
-      //console.log(types)
       let ids = types.map((type) => type.id)
       let found_ids = data.types.filter((type) => ids.includes(type))
       if (found_ids.length > 1) {
