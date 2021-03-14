@@ -1,19 +1,5 @@
 'use strict'
 
-const slugify = require('slugify')
-
-const setSlug = (params, data) => {
-  if (data.name) {
-    const name_slug = slugify(data.name, { lower: true })
-    if (data.slug) {
-      if (data.slug.startsWith(name_slug)) {
-        return
-      }
-    }
-    data.slug = name_slug + `-` + params.id.toString()
-  }
-}
-
 const validateTypes = async (data) => {
   // validate has location
   if (data.location == null) {
@@ -46,7 +32,6 @@ const validateTypes = async (data) => {
 module.exports = {
   lifecycles: {
     beforeCreate: async (data) => {
-      //setSlug(data)
       const err = await validateTypes(data)
       if (err) {
         throw strapi.errors.badRequest(err)
@@ -58,11 +43,13 @@ module.exports = {
       await strapi.query('meeting').update({ id: result.id }, data)
     },
     beforeUpdate: async (params, data) => {
+      console.log(data)
       // Don't perform custom update operations when we publish or unpublish
-      if (data.published_at !== undefined) {
+      if (data.published_at !== undefined && data.name === undefined) {
         return
       }
-      setSlug(params, data)
+      strapi.services.slug.setSlug(params, data)
+      //console.log(data)
       //console.log(params)
       const err = await validateTypes(data)
       if (err) {
