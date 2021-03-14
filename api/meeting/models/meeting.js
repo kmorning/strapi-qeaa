@@ -7,11 +7,14 @@ const validateTypes = async (data) => {
   }
   // validate unique type categories
   if (data.types) {
-    let unique_catagories = await strapi.query('meeting-type-category').find({ unique: true })
+    let unique_categories = await strapi.query('meeting-type-category').find({ unique: true })
+    //console.log(unique_catagories)
 
-    for (var category in unique_catagories) {
-      let id = category.id
+    for (var i in unique_categories) {
+      let id = unique_categories[i].id
+      //console.log('category id: ' + id)
       let types = await strapi.query('meeting-type').find({ category: id })
+      //console.log(types)
       let ids = types.map((type) => type.id)
       let found_ids = data.types.filter((type) => ids.includes(type))
       if (found_ids.length > 1) {
@@ -43,14 +46,11 @@ module.exports = {
       await strapi.query('meeting').update({ id: result.id }, data)
     },
     beforeUpdate: async (params, data) => {
-      console.log(data)
       // Don't perform custom update operations when we publish or unpublish
       if (data.published_at !== undefined && data.name === undefined) {
         return
       }
       strapi.services.slug.setSlug(params, data)
-      //console.log(data)
-      //console.log(params)
       const err = await validateTypes(data)
       if (err) {
         throw strapi.errors.badRequest(err)
